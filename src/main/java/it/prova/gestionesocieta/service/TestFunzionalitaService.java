@@ -22,7 +22,7 @@ public class TestFunzionalitaService {
 	public void testInserisciSocieta() {
 		Date dataFondazione = new Date();
 		try {
-			dataFondazione = new SimpleDateFormat("yyyy-MM-dd").parse("2002-03-22");
+			dataFondazione = new SimpleDateFormat("yyyy-MM-dd").parse("1985-03-22");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class TestFunzionalitaService {
 	public void testFindByExampleSocieta() {
 		Date dataFondazione = new Date();
 		try {
-			dataFondazione = new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01");
+			dataFondazione = new SimpleDateFormat("yyyy-MM-dd").parse("1980-01-01");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +54,7 @@ public class TestFunzionalitaService {
 	public void testInserisciDipendente() {
 		Date dataAssunzione = new Date();
 		try {
-			dataAssunzione = new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-02");
+			dataAssunzione = new SimpleDateFormat("yyyy-MM-dd").parse("1998-04-02");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,6 +70,23 @@ public class TestFunzionalitaService {
 			throw new RuntimeException("testInserisciDipendente.....failed, inserimento non avvenuto.");
 		System.out.println("testInserisciDipendente.....OK");
 	}
+	
+	public void testAggiornaDipendente() {
+		List<Dipendente> dipendentiSuDb = dipendenteService.listAllDipendenti();
+		if(dipendentiSuDb.isEmpty())
+			throw new RuntimeException("errore, il DB sembra essere vuoto...");
+		dipendentiSuDb.get(0).setRal(32000);
+		dipendentiSuDb.get(0).setCognome("Berulli");
+		Long idDaAggiornare = dipendentiSuDb.get(0).getId();
+		
+		dipendenteService.aggiorna(dipendentiSuDb.get(0));
+		
+		if(!dipendenteService.caricaSingoloDipendente(idDaAggiornare).getCognome().equals("Berulli")) {
+			System.out.println(dipendenteService.caricaSingoloDipendente(idDaAggiornare).getCognome());
+			throw new RuntimeException("testAggiornaDipendente......failed, i dati non sono aggiornati.");
+		}
+		System.out.println("testAggiornaDipendente.....OK");
+	}
 
 	public void testRimuoviSocieta() {
 		List<Societa> societaSuDB = societaService.listAllSocieta();
@@ -82,10 +99,8 @@ public class TestFunzionalitaService {
 			System.out.println("testRimuoviSocieta..... eccezione lanciata come atteso:" + e.getMessage());
 		}
 
-		Dipendente toRemove = societaService.caricaSingolaSocietaFetch(societaSuDB.get(0).getId()).getDipendenti()
-				.stream().findFirst().orElse(null);
-
-		dipendenteService.rimuovi(toRemove);
+		 societaService.caricaSingolaSocietaFetch(societaSuDB.get(0).getId()).getDipendenti()
+				.stream().forEach(dip -> {dipendenteService.rimuovi(dip);});
 
 		societaService.rimuovi(societaSuDB.get(0));
 		
@@ -93,4 +108,6 @@ public class TestFunzionalitaService {
 			throw new RuntimeException("testRimuoviSocieta.....failed");
 		System.out.println("testRimuoviSocieta.....OK");
 	}
+	
+
 }
