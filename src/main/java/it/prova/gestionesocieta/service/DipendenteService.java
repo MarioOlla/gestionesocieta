@@ -17,4 +17,6 @@ public interface DipendenteService {
 	public void rimuovi(Dipendente dipendente);
 	
 	public List<Dipendente> findByExample(Dipendente example);
+	
+	public Dipendente ilPiuAnzianoTraIDipendentiDiSocietaFondateDal1990();
 }

@@ -98,6 +98,27 @@ public class TestFunzionalitaService {
 		System.out.println("testFindSocietaConAlmenoUnDipendenteRalSopra30000.....OK");
 	}
 	
+	public void testIlPiuAnzianoTraIDipendentiDiSocietaFondateDal1990() {
+		
+		try {
+			Date primoGen1990 = new SimpleDateFormat("yyyy-MM-dd").parse("1990-01-01");
+			System.out.println(primoGen1990);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		List<Dipendente> dipendentiSuDB = dipendenteService.listAllDipendenti();
+		if (dipendentiSuDB.isEmpty())
+			throw new RuntimeException("testIlPiuAnzianoTraIDipendentiDiSocietaFondateDal1990.....failed, il DB sembra essere vuoto....");
+		Dipendente result = dipendenteService.ilPiuAnzianoTraIDipendentiDiSocietaFondateDal1990();
+		if(result==null)
+			throw new RuntimeException("testIlPiuAnzianoTraIDipendentiDiSocietaFondateDal1990.....failed,la ricerca non ha prodotto i risultati attesi.");
+		System.out.println("data assunzione :"+result.getDataAssunzione()+"; data fondazione :"+result.getSocieta().getDataFondazione());
+		System.out.println("testIlPiuAnzianoTraIDipendentiDiSocietaFondateDal1990.....OK");
+	}
+	
 	public void testRimuoviSocieta() {
 		List<Societa> societaSuDB = societaService.listAllSocieta();
 		if (societaSuDB.isEmpty())
