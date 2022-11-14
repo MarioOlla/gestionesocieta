@@ -55,7 +55,7 @@ public class DipendenteServiceImpl implements DipendenteService {
 		if(StringUtils.isNoneEmpty(example.getCognome()))
 			query += " and d.cognome like '%"+example.getCognome()+"%'";
 		if(example.getDataAssunzione()!= null)
-			query += " and d.dataassunzione > '"+example.getDataAssunzione()+"'";
+			query += " and d.dataAssunzione > "+example.getDataAssunzione().toInstant();
 		if(example.getRal()!= null)
 			query += " and d.ral > "+example.getRal();
 		

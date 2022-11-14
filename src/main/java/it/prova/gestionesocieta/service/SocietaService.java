@@ -10,6 +10,8 @@ public interface SocietaService {
 	
 	public Societa caricaSingolaSocieta(Long id);
 	
+	public Societa caricaSingolaSocietaFetch(Long id);
+	
 	public void aggiorna(Societa societa);
 	
 	public void inserisciNuova(Societa societa);

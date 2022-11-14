@@ -1,11 +1,17 @@
 package it.prova.gestionesocieta;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import it.prova.gestionesocieta.service.TestFunzionalitaService;
+
 @SpringBootApplication
 public class GestionesocietaApplication implements CommandLineRunner{
+	
+	@Autowired
+	private TestFunzionalitaService testFunzionalitaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionesocietaApplication.class, args);
@@ -17,7 +23,10 @@ public class GestionesocietaApplication implements CommandLineRunner{
 		System.out.println("################ START   #################");
 		System.out.println("################ eseguo i test  #################");
 		
-		
+		testFunzionalitaService.testInserisciSocieta();
+		testFunzionalitaService.testFindByExampleSocieta();
+		testFunzionalitaService.testInserisciDipendente();
+		testFunzionalitaService.testRimuoviSocieta();
 		
 		System.out.println("################ FINE   #################");
 	}
