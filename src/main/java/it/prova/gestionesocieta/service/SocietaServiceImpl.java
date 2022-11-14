@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,6 +67,11 @@ public class SocietaServiceImpl implements SocietaService{
 			query += " and s.dataFondazione > '"+example.getDataFondazione().toInstant()+"'";
 		
 		return entityManager.createQuery(query, Societa.class).getResultList();
+	}
+
+	@Override
+	public List<Societa> tutteSocietaConDipendentiRalMaggioreDi30000() {
+		return societaRepository.findAllSocietaWithDipendentiRalGreaterThan30000();
 	}
 
 }

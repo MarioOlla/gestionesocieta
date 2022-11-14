@@ -87,7 +87,17 @@ public class TestFunzionalitaService {
 		}
 		System.out.println("testAggiornaDipendente.....OK");
 	}
-
+	
+	public void testFindSocietaConAlmenoUnDipendenteRalSopra30000() {
+		List<Societa> societaSuDB = societaService.listAllSocieta();
+		if (societaSuDB.isEmpty())
+			throw new RuntimeException("testFindSocietaConAlmenoUnDipendenteRalSopra30000.....failed, il DB sembra essere vuoto....");
+		
+		if(societaService.tutteSocietaConDipendentiRalMaggioreDi30000().isEmpty())
+			throw new RuntimeException("testFindSocietaConAlmenoUnDipendenteRalSopra30000.....failed,la ricerca non ha prodotto i risultati attesi.");
+		System.out.println("testFindSocietaConAlmenoUnDipendenteRalSopra30000.....OK");
+	}
+	
 	public void testRimuoviSocieta() {
 		List<Societa> societaSuDB = societaService.listAllSocieta();
 		if (societaSuDB.isEmpty())

@@ -27,6 +27,7 @@ public class GestionesocietaApplication implements CommandLineRunner{
 		testFunzionalitaService.testFindByExampleSocieta();
 		testFunzionalitaService.testInserisciDipendente();
 		testFunzionalitaService.testAggiornaDipendente();
+		testFunzionalitaService.testFindSocietaConAlmenoUnDipendenteRalSopra30000();
 		testFunzionalitaService.testRimuoviSocieta();
 		
 		System.out.println("################ FINE   #################");

@@ -19,4 +19,6 @@ public interface SocietaService {
 	public void rimuovi(Societa societa);
 	
 	public List<Societa> findByExample(Societa example);
+	
+	public List<Societa> tutteSocietaConDipendentiRalMaggioreDi30000();
 }
